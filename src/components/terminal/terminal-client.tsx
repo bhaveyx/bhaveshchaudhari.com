@@ -47,6 +47,18 @@ export function TerminalClient({
 
     const { commands, currentDirectory, setTheme, theme } = useTerminalCommands()
 
+    const addLine = useCallback((type: TerminalLine["type"], content: string) => {
+        setLines((prev) => [
+            ...prev,
+            {
+                id: Math.random().toString(36).substr(2, 9),
+                type,
+                content,
+                timestamp: new Date(),
+            },
+        ])
+    }, [])
+
     useEffect(() => {
         initializeBlogStore(posts)
     }, [posts])
@@ -77,7 +89,7 @@ export function TerminalClient({
         }, 200)
 
         return () => clearInterval(bootInterval)
-    }, [showBootSequence])
+    }, [showBootSequence, addLine])
 
     useEffect(() => {
         if (!isTyping && !isBooting) {
@@ -111,18 +123,6 @@ export function TerminalClient({
             terminalRef.current.scrollTop = terminalRef.current.scrollHeight
         }
     }, [lines])
-
-    const addLine = useCallback((type: TerminalLine["type"], content: string) => {
-        setLines((prev) => [
-            ...prev,
-            {
-                id: Math.random().toString(36).substr(2, 9),
-                type,
-                content,
-                timestamp: new Date(),
-            },
-        ])
-    }, [])
 
     const typeText = useCallback(
         async (text: string | string[]) => {
@@ -296,7 +296,7 @@ export function TerminalClient({
                 isBooting={isBooting}
                 isTyping={isTyping}
                 showCursor={true}
-                inputRef={inputRef}
+                inputRef={inputRef as React.RefObject<HTMLInputElement>}
             />
         </div>
     )

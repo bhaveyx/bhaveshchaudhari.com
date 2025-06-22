@@ -2,8 +2,6 @@ import type { NextRequest } from "next/server"
 import { getBlogPost } from "@/lib/blog"
 import { generateBlogPostOGImage } from "@/lib/og-image"
 
-export const runtime = "edge"
-
 interface RouteParams {
   params: Promise<{ slug: string }>
 }
