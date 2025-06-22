@@ -1,0 +1,61 @@
+import { notFound } from "next/navigation"
+import { getBlogPost, getBlogPostSlugs } from "@/lib/blog"
+import { BlogLayout } from "@/components/blog-layout"
+import type { Metadata } from "next"
+import { compileBlogPost } from "@/lib/mdx-utils"
+import { BlogErrorBoundary } from "@/components/error-boundary"
+
+interface BlogPostPageProps {
+	params: Promise<{ slug: string }>
+}
+
+export async function generateStaticParams() {
+	const slugs = getBlogPostSlugs()
+	return slugs.map((slug) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+	const { slug } = await params
+	const post = getBlogPost(slug)
+
+	if (!post) {
+		return {
+			title: "Post Not Found",
+		}
+	}
+
+	return {
+		title: post.title,
+		description: post.metaDescription,
+		keywords: post.keywords,
+		authors: [{ name: post.author }],
+		openGraph: {
+			title: post.title,
+			description: post.excerpt,
+			type: "article",
+			publishedTime: post.publishedAt,
+			authors: [post.author],
+			tags: post.tags,
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: post.title,
+			description: post.excerpt,
+		},
+	}
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+	const { slug } = await params
+	const post = getBlogPost(slug)
+
+	if (!post) {
+		notFound()
+	}
+
+	return (
+		<BlogErrorBoundary>
+			<BlogLayout post={post}>{await compileBlogPost(post.content)}</BlogLayout>
+		</BlogErrorBoundary>
+	)
+}

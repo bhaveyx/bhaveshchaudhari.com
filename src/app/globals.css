@@ -120,3 +120,48 @@
     @apply bg-background text-foreground;
   }
 }
+
+.font-mono {
+  font-family: "Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace;
+}
+
+/* Terminal cursor animation */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-pulse {
+  animation: blink 1s infinite;
+}
+
+/* Fix for dropdown menu visibility in portals */
+[data-radix-popper-content-wrapper] {
+  z-index: 10000 !important;
+}
+
+.dropdown-menu-content {
+  opacity: 1 !important;
+  background-color: white !important;
+}
+
+.dark .dropdown-menu-content {
+  background-color: rgb(31 41 55) !important;
+}
+
+[data-radix-dropdown-menu-content] {
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Ensure proper stacking for terminal dropdown */
+.terminal-dropdown {
+  z-index: 10000 !important;
+  position: relative !important;
+}
