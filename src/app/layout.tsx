@@ -54,7 +54,7 @@ export default function RootLayout({
                     <main className="pt-14">
                         {children}
                     </main>
-                    <GlobalTerminal posts={posts} />
+                    {/* <GlobalTerminal posts={posts} /> */}
                 </ThemeProvider>
             </body>
         </html>

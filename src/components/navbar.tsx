@@ -15,8 +15,6 @@ export function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            console.log(window.scrollY);
-
             if (window.scrollY > 10) {
                 // navRef.current.style.background = "white";
                 // navRef.current.style.borderBottom = "1px solid #e5e7eb";

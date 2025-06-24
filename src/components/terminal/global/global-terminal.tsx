@@ -28,8 +28,6 @@ export function GlobalTerminal({ posts }: { posts: BlogPost[] }) {
         return createPortal(<MinimizedTerminal />, document.body)
     }
 
-    console.log("xyz size", size)
-    
     if (isOpen && !isMinimized) {
         return createPortal(
             <DraggableTerminal>

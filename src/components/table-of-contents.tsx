@@ -1,126 +1,88 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useScrollSpy } from "@/hooks/useScrollSpy"
 import { cn } from "@/lib/utils"
-
-interface TocItem {
-    id: string
-    text: string
-    level: number
-}
+import { Menu } from "lucide-react"
+import {
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer"
+import { TocItem } from "@/lib/blog"
 
 interface TableOfContentsProps {
     className?: string
+    tocItems: TocItem[]
 }
 
-export function TableOfContents({ className }: TableOfContentsProps) {
-    const [tocItems, setTocItems] = useState<TocItem[]>([])
-    const [activeId, setActiveId] = useState<string>("")
+export function TableOfContents({ className, tocItems }: TableOfContentsProps) {
+    const activeId = useScrollSpy(tocItems.map(item => `#${item.id}`), {
+        rootMargin: "-80px 0% -30% 0%",
+        threshold: 0.6,
+    });
 
-    const scrollToHeading = useCallback((id: string) => {
-        const element = document.getElementById(id)
-        if (element) {
-            const yOffset = -100
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-            window.scrollTo({ top: y, behavior: "smooth" })
+    if (tocItems.length === 0) return null;
 
-            // update URL hash without triggering scroll
-            history.replaceState(null, "", `#${id}`)
-        }
-    }, [])
-
-    useEffect(() => {
-        const generateId = (text: string): string => {
-            return text
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/(^-|-$)/g, "")
-        }
-
-        const headings = Array.from(
-            document.querySelectorAll("article h1, article h2, article h3, article h4, article h5, article h6"),
-        )
-
-        headings.forEach((heading) => {
-            if (!heading.id) {
-                const id = generateId(heading.textContent || "")
-                heading.id = id
-            }
-            (heading as HTMLElement).style.scrollMarginTop = "120px"
-        })
-
-        const items: TocItem[] = headings.map((heading) => ({
-            id: heading.id,
-            text: heading.textContent || "",
-            level: Number.parseInt(heading.tagName.charAt(1)),
-        }))
-
-        setTocItems(items)
-
-        const observerOptions = {
-            rootMargin: "-20% 0% -35% 0%",
-            threshold: [0, 0.25, 0.5, 0.75, 1],
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            const visibleEntries = entries.filter((entry) => entry.isIntersecting)
-
-            if (visibleEntries.length > 0) {
-                const sortedEntries = visibleEntries.sort((a, b) => {
-                    return a.boundingClientRect.top - b.boundingClientRect.top
-                })
-
-                const topEntry = sortedEntries[0]
-                if (topEntry && topEntry.target.id !== activeId) {
-                    setActiveId(topEntry.target.id)
-                }
-            }
-        }, observerOptions)
-
-        headings.forEach((heading) => observer.observe(heading))
-
-        const hash = window.location.hash.slice(1)
-        if (hash && items.some((item) => item.id === hash)) {
-            setActiveId(hash)
-            setTimeout(() => scrollToHeading(hash), 100)
-        }
-
-        return () => {
-            headings.forEach((heading) => observer.unobserve(heading))
-        }
-    }, [scrollToHeading, activeId])
-
-    if (tocItems.length === 0) return null
-
-    return (
-        <nav className={cn("space-y-1", className)}>
+    const TocContent = () => (
+        <nav className="space-y-1">
             <h3 className="font-semibold text-sm text-gray-900 dark:text-white uppercase tracking-wide mb-4">
                 Table of Contents
             </h3>
 
             <ul className="space-y-1 text-sm">
                 {tocItems.map((item) => {
-                    const isActive = activeId === item.id
-                    const paddingLeft = (item.level - 1) * 12 + 8
+                    const isActive = activeId === item.id;
+                    const paddingLeft = (item.level - 2) * 12 + 8;
 
                     return (
                         <li key={item.id} style={{ paddingLeft: `${paddingLeft}px` }}>
-                            <button
-                                onClick={() => scrollToHeading(item.id)}
+                            <a
+                                href={`#${item.id}`}
                                 className={cn(
-                                    "text-left transition-all duration-200 block w-full py-2 px-3 rounded-md text-sm leading-5 hover:bg-gray-100 dark:hover:bg-gray-800",
+                                    "text-left transition-all duration-200 block w-full py-2 px-3 rounded-md text-sm leading-5",
                                     isActive
-                                        ? "text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-900/20"
-                                        : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white",
+                                        ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
+                                        : "text-gray-700 dark:text-gray-300"
                                 )}
                                 aria-current={isActive ? "location" : undefined}
                             >
                                 {item.text}
-                            </button>
+                            </a>
                         </li>
-                    )
+                    );
                 })}
             </ul>
         </nav>
-    )
+    );
+
+    return (
+        <>
+            <div className={cn("hidden md:block", className)}>
+                <TocContent />
+            </div>
+
+            <div className="md:hidden">
+                <Drawer>
+                    <DrawerTrigger asChild>
+                        <button
+                            className="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
+                            aria-label="Open table of contents"
+                        >
+                            <Menu size={20} />
+                        </button>
+                    </DrawerTrigger>
+                    <DrawerContent className="max-h-[80vh]">
+                        <DrawerHeader>
+                            <DrawerTitle>Table of Contents</DrawerTitle>
+                        </DrawerHeader>
+                        <div className="px-4 pb-6 overflow-y-auto">
+                            <TocContent />
+                        </div>
+                    </DrawerContent>
+                </Drawer>
+            </div>
+        </>
+    );
 }

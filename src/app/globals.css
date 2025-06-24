@@ -125,6 +125,10 @@
   font-family: "Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Terminal cursor animation */
 @keyframes blink {
   0%,
