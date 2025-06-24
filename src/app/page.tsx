@@ -53,7 +53,7 @@ export default function HomePage() {
                     </div>
 
                     <div className="max-w-2xl mx-auto">
-                        {/* <Terminal /> */}
+                        <Terminal />
                     </div>
                 </section>
             </div>
