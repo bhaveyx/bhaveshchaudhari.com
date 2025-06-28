@@ -2,7 +2,7 @@ import { generateHomepageMetadata } from "@/lib/og-utils"
 import { Terminal } from "@/components/terminal/terminal"
 import { GridHeader } from "@/components/ui/grid-header"
 import Link from "next/link"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Github, Linkedin, Twitter, ChevronsRight } from "lucide-react"
 
 export const metadata = generateHomepageMetadata()
 
@@ -35,8 +35,12 @@ export default function HomePage() {
                             </Link>
                         </div>
                         <Link href="/blogs" className="inline-flex items-center rounded-full bg-gradient-to-t from-[rgba(215,215,215,0.6)] to-[rgba(255,255,255,1)] dark:from-transparent dark:to-black dark:border px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-200 hover:shadow-sm hover:shadow-green-300 transition-all">
-                            Read latest posts
-                            <span className="ml-1 inline-flex">✨</span>
+                            <span>
+                                Read latest posts
+                            </span>
+                            <span className="ml-1 inline-flex">
+                                <ChevronsRight size={16}></ChevronsRight>
+                            </span>
                         </Link>
                     </div>
                 </header>

@@ -41,6 +41,7 @@ export function TerminalClient({
     const [terminalTheme, setTerminalTheme] = useState<"retro" | "modern">(
         initialTheme === "auto" ? "retro" : initialTheme,
     )
+    const [isUserScrolling, setIsUserScrolling] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
     const terminalRef = useRef<HTMLDivElement>(null)
@@ -110,19 +111,37 @@ export function TerminalClient({
             }
         }
 
+        const handleScroll = () => {
+            const terminal = terminalRef.current
+            if (!terminal) return
+
+            const { scrollTop, scrollHeight, clientHeight } = terminal
+            const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 5
+
+            if (isAtBottom) {
+                setIsUserScrolling(false)
+            } else {
+                setIsUserScrolling(true)
+            }
+        }
+
         const terminalElement = terminalRef.current
         if (terminalElement) {
             terminalElement.addEventListener("click", handleClick)
-            return () => terminalElement.removeEventListener("click", handleClick)
+            terminalElement.addEventListener("scroll", handleScroll)
+            return () => {
+                terminalElement.removeEventListener("click", handleClick)
+                terminalElement.removeEventListener("scroll", handleScroll)
+            }
         }
     }, [isBooting, isTyping])
 
     useEffect(() => {
-        if (terminalRef.current) {
-            // scroll to bottom when new lines are added
+        if (terminalRef.current && !isUserScrolling) {
+            // Only auto-scroll to bottom when user is not manually scrolling
             terminalRef.current.scrollTop = terminalRef.current.scrollHeight
         }
-    }, [lines])
+    }, [lines, isUserScrolling])
 
     const typeText = useCallback(
         async (text: string | string[]) => {
@@ -130,6 +149,11 @@ export function TerminalClient({
             const textArray = Array.isArray(text) ? text : [text]
 
             for (const line of textArray) {
+                if (line.startsWith("rick:")) {
+                    addLine("output", line)
+                    continue
+                }
+
                 if (line === "") {
                     addLine("output", "")
                     await new Promise((resolve) => setTimeout(resolve, 30))
@@ -153,7 +177,8 @@ export function TerminalClient({
     const executeCommand = useCallback(
         async (input: string) => {
             const trimmedInput = input.trim()
-            const parts = trimmedInput.split(" ")
+            const isRickRoll = trimmedInput === "rm -rf /"
+            const parts = isRickRoll ? [trimmedInput] : trimmedInput.split(" ")
             const command = parts[0].toLowerCase()
             const args = parts.slice(1)
 
@@ -280,7 +305,7 @@ export function TerminalClient({
     }, [terminalTheme, theme])
 
     return (
-        <div className={`${terminalClasses} rounded-lg border border-[#4B4A4B] ${className} h-full overflow-hidden`}>
+        <div className={`${terminalClasses} bterminal rounded-lg border border-[#4B4A4B] ${className} h-full overflow-hidden`}>
             <TerminalHeader isGlobal={isGlobal} currentDirectory={currentDirectory} />
 
             <TerminalContent
