@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/navbar";
@@ -8,11 +8,24 @@ import { getAllBlogPosts } from "@/lib/blog";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
+    weight: ["400", "500", "600", "700", "800"],
     subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+const poppins = Poppins({
+    variable: "--font-poppins",
+    weight: ["300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["latin"],
+});
+
+const roboto = Roboto({
+    variable: "--font-roboto",
+    weight: ["300", "400", "500", "600", "700", "800", "900"],
     subsets: ["latin"],
 });
 
@@ -41,7 +54,7 @@ export default function RootLayout({
                 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
                 <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
             </head>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${roboto.variable} antialiased`}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
