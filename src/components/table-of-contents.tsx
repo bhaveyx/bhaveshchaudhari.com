@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Menu } from "lucide-react"
 import {
     Drawer,
+    DrawerClose,
     DrawerContent,
     DrawerHeader,
     DrawerTitle,
@@ -25,8 +26,8 @@ export function TableOfContents({ className, tocItems }: TableOfContentsProps) {
 
     if (tocItems.length === 0) return null;
 
-    const TocContent = () => (
-        <nav className="space-y-1">
+    const TocContent = ({ withDrawerClose = false }: { withDrawerClose?: boolean }) => (
+        <nav>
             <h3 className="font-semibold text-sm text-gray-900 dark:text-white uppercase tracking-wide mb-4">
                 Table of Contents
             </h3>
@@ -34,22 +35,33 @@ export function TableOfContents({ className, tocItems }: TableOfContentsProps) {
             <ul className="space-y-1 text-sm">
                 {tocItems.map((item) => {
                     const isActive = activeId === item.id;
-                    const paddingLeft = (item.level - 2) * 12 + 8;
+                    const paddingLeft = (item.level - 2) * 12 + (item.level ?? 8);
+
+                    const link = (
+                        <a
+                            href={`#${item.id}`}
+                            className={cn(
+                                "text-left transition-all duration-200 block w-full py-2 px-3 rounded-md text-sm leading-5",
+                                isActive
+                                    ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
+                                    : "text-gray-700 dark:text-gray-300"
+                            )}
+                            aria-current={isActive ? "location" : undefined}
+                        >
+                            {item.text}
+                        </a>
+                    );
+
 
                     return (
                         <li key={item.id} style={{ paddingLeft: `${paddingLeft}px` }}>
-                            <a
-                                href={`#${item.id}`}
-                                className={cn(
-                                    "text-left transition-all duration-200 block w-full py-2 px-3 rounded-md text-sm leading-5",
-                                    isActive
-                                        ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
-                                        : "text-gray-700 dark:text-gray-300"
-                                )}
-                                aria-current={isActive ? "location" : undefined}
-                            >
-                                {item.text}
-                            </a>
+                            {withDrawerClose ? (
+                                <DrawerClose asChild>
+                                    {link}
+                                </DrawerClose>
+                            ) : (
+                                link
+                            )}
                         </li>
                     );
                 })}
@@ -64,7 +76,7 @@ export function TableOfContents({ className, tocItems }: TableOfContentsProps) {
             </div>
 
             <div className="md:hidden">
-                <Drawer>
+                <Drawer >
                     <DrawerTrigger asChild>
                         <button
                             className="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
@@ -78,7 +90,7 @@ export function TableOfContents({ className, tocItems }: TableOfContentsProps) {
                             <DrawerTitle>Table of Contents</DrawerTitle>
                         </DrawerHeader>
                         <div className="px-4 pb-6 overflow-y-auto">
-                            <TocContent />
+                            <TocContent withDrawerClose />
                         </div>
                     </DrawerContent>
                 </Drawer>

@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
 
     const title = searchParams.get("title") || "Bhavesh Chaudhari"
-    const description = searchParams.get("description") || "Developer & Tech Writer"
+    const description = searchParams.get("description") || "Building things, exploring, and writing it down."
     const category = searchParams.get("category") || undefined
     const tags = searchParams.get("tags")?.split(",") || []
     const type = (searchParams.get("type") as "blog" | "homepage" | "page") || "page"

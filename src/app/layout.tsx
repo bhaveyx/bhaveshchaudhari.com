@@ -3,8 +3,10 @@ import { Geist, Geist_Mono, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/navbar";
-import { GlobalTerminal } from "@/components/terminal/global/global-terminal";
-import { getAllBlogPosts } from "@/lib/blog";
+import { Toaster } from "@/components/ui/sonner";
+// import { GlobalTerminal } from "@/components/terminal/global/global-terminal";
+// import { getAllBlogPosts } from "@/lib/blog";
+import Script from "next/script";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -40,7 +42,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
 
-    const posts = getAllBlogPosts()
+    // const posts = getAllBlogPosts()
 
     return (
         <html lang="en" suppressHydrationWarning>
@@ -53,6 +55,24 @@ export default function RootLayout({
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
                 <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+                <Script
+                    strategy="afterInteractive"
+                    src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
+                />
+                <Script
+                    id="gtag-init"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', '${process.env.GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                      });
+                    `,
+                    }}
+                />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${roboto.variable} antialiased`}>
                 <ThemeProvider
@@ -67,7 +87,8 @@ export default function RootLayout({
                     <main className="pt-14">
                         {children}
                     </main>
-                    <GlobalTerminal posts={posts} />
+                    {/* <GlobalTerminal posts={posts} /> */}
+                    <Toaster />
                 </ThemeProvider>
             </body>
         </html>

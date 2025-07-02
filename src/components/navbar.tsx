@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, } from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "./theme-switcher";
-import { TerminalTrigger } from "./terminal/global/terminal-trigger";
+// import { TerminalTrigger } from "./terminal/global/terminal-trigger";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -47,7 +47,7 @@ export function Navbar() {
                 <div className={
                     cn(
                         "flex items-center justify-between max-w-2xl w-[90%]",
-                        pathname !== "/" && "max-w-6xl"
+                        pathname !== "/" && "max-w-5xl"
                     )
                 }>
                     <div className="flex">
@@ -61,7 +61,7 @@ export function Navbar() {
                                 >
                                     <Image className="rounded-full" width={30} height={30} src={"https://github.com/bhavesh-chaudhari.png"} alt={"profile image"} />
                                     <span className="font-semibold text-lg">
-                                        bhavexsh
+                                        bhaveyx
                                     </span>
                                 </Link>
                             </li>
@@ -69,7 +69,7 @@ export function Navbar() {
                     </div>
                     <div className="flex gap-4 items-center">
                         <ThemeSwitcher />
-                        <TerminalTrigger variant="button" />
+                        {/* <TerminalTrigger variant="button" /> */}
                     </div>
                 </div>
             </nav>

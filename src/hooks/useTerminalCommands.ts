@@ -3,7 +3,8 @@
 import { usePathname, useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { useBlogStore } from "@/stores/blog-store"
-import { useTerminalStore } from "@/stores/terminal-store"
+// import { useTerminalStore } from "@/stores/terminal-store"
+import { CONTACT_EMAIL, SOCIAL_LINKS, WEBSITE_URL } from "@/constants"
 
 interface Command {
     name: string
@@ -23,14 +24,14 @@ export function useTerminalCommands() {
     const isLoadingBlogs = useBlogStore((state) => state.isLoading)
     const searchPosts = useBlogStore((state) => state.searchPosts)
 
-    const {
-        closeTerminal,
-        minimizeTerminal,
-        setTheme: setTerminalTheme,
-        theme: terminalTheme,
-        setOpacity,
-        resetTerminal,
-    } = useTerminalStore()
+    // const {
+    //     closeTerminal,
+    //     minimizeTerminal,
+    //     setTheme: setTerminalTheme,
+    //     theme: terminalTheme,
+    //     setOpacity,
+    //     resetTerminal,
+    // } = useTerminalStore()
 
     const commands: Record<string, Command> = {
         help: {
@@ -55,50 +56,52 @@ export function useTerminalCommands() {
                 return [
                     "Available commands:",
                     "",
-                    "ℹ️  Information:",
+                    "## Information:",
                     "  help [cmd]      - Show help (optionally for specific command)",
                     "  about           - Learn about me",
                     "  whoami          - Display current user",
                     "  date            - Show current date and time",
                     "",
-                    "📞 Contact:",
+                    "## Contact:",
                     "  contact         - Get my contact information",
                     "",
-                    "🌐 Navigation:",
-                    "  open <target>   - Open blog post or external link",
+                    "## Navigation:",
+                    "  open <target>   - Open blog post or other available targets (type open to see options)",
                     "  goto <page>     - Navigate to different pages",
                     "",
-                    "📝 Blog & Content:",
+                    "## Blog & Content:",
                     "  blog            - See latest blog posts",
                     "  search <term>   - Search through blog posts",
                     "  featured        - Show featured posts",
                     "  recent [num]    - Show recent posts",
                     "",
-                    "📁 File System:",
+                    "## File System:",
                     "  pwd             - Show current directory",
                     "  cat <file>      - Display file contents",
                     "",
-                    "🚀 Projects:",
+                    "## Projects:",
                     "  projects        - View my featured projects",
-                    "",
-                    "🎨 Terminal Control:",
-                    "  theme           - Toggle terminal theme",
-                    "  opacity <0-100> - Set terminal opacity",
-                    "  minimize        - Minimize terminal",
-                    "  close           - Close terminal",
-                    "  reset           - Reset terminal position/size",
-                    "  clear           - Clear terminal history",
-                    "",
-                    "💡 Global Shortcuts:",
-                    "  Ctrl + `        - Toggle terminal anywhere",
-                    "  Ctrl + Shift + T - Alternative toggle",
-                    "  Escape          - Close terminal",
+                    "## Must Try:",
+                    "  rm -rf /        - You may test that assumption at your convenience ",
+                    // "",
+                    // "🎨 Terminal Control:",
+                    // "  theme           - Toggle terminal theme",
+                    // "  opacity <0-100> - Set terminal opacity",
+                    // "  minimize        - Minimize terminal",
+                    // "  close           - Close terminal",
+                    // "  reset           - Reset terminal position/size",
+                    // "",
+                    // "💡 Global Shortcuts:",
+                    // "  Ctrl + `        - Toggle terminal anywhere",
+                    // "  Ctrl + Shift + T - Alternative toggle",
+                    // "  Escape          - Close terminal",
                     "",
                     "💡 Tips:",
                     "  ↑/↓ arrows     - Command history",
                     "  Tab            - Auto-complete commands",
-                    "  Drag header    - Move terminal",
-                    "  Drag corner    - Resize terminal",
+                    "  clear           - Clear terminal history",
+                    // "  Drag header    - Move terminal",
+                    // "  Drag corner    - Resize terminal",
                 ]
             },
         },
@@ -125,20 +128,22 @@ export function useTerminalCommands() {
                     return [
                         "# About Bhavesh Chaudhari",
                         "",
-                        "Full-Stack Developer & Tech Writer",
+                        "Full-Stack Developer & Builder",
                         "Location: India",
-                        "Experience: 5+ years",
                         "",
-                        "## Mission",
-                        "Building scalable web applications and sharing",
-                        "knowledge through technical writing.",
+                        "## About Me",
+                        "Hi, I’m Bhavesh. I love building things with code.",
+                        "As AI reshapes everything faster than we can imagine,",
+                        "I’m using this space to document my thoughts,",
+                        "experiments, and lessons as I lay the foundation",
+                        "for something bigger.",
                         "",
                         "## Interests",
-                        "- Modern web technologies",
-                        "- Open source contributions",
-                        "- Developer tools & productivity",
-                        "- Technical content creation",
-                    ]
+                        "- Web technologies & scalable systems",
+                        "- SaaS, Indie Hacking",
+                        "- AI & how it changes how we build",
+                        "- Sharing what I learn",
+                    ];
                 }
 
                 if (filename === "contact.txt") {
@@ -146,11 +151,11 @@ export function useTerminalCommands() {
                         "Contact Information",
                         "==================",
                         "",
-                        "Email: bhic2030@gmail.com",
-                        "GitHub: https://github.com/bhavesh-chaudhari",
-                        "LinkedIn: https://linkedin.com/in/bhaveshc0",
-                        "Twitter: @roninbhavesh",
-                        "Website: https://www.bhaveshchaudhari.com",
+                        `Email: ${CONTACT_EMAIL}`,
+                        `GitHub: ${SOCIAL_LINKS.github}`,
+                        `LinkedIn: ${SOCIAL_LINKS.linkedin}`,
+                        `Twitter: ${SOCIAL_LINKS.twitter}`,
+                        `Website: ${WEBSITE_URL}`,
                     ]
                 }
 
@@ -166,22 +171,20 @@ export function useTerminalCommands() {
                 "│              ABOUT ME                   │",
                 "╰─────────────────────────────────────────╯",
                 "",
-                "Name: Bhavesh Chaudhari",
-                "Role: Full-Stack Developer & Tech Writer",
+                "Full-Stack Developer & Builder",
                 "Location: India",
-                "Experience: 5+ years in web development",
                 "",
-                "🎯 Mission:",
-                "Building scalable web applications and sharing",
-                "knowledge through technical writing.",
+                "Hi, I’m Bhavesh. I love building things with code.",
+                "As AI reshapes everything faster than we can imagine,",
+                "I’m using this space to document my thoughts,",
+                "experiments, and lessons as I lay the foundation",
+                "for something bigger.",
                 "",
-                "🚀 Interests:",
-                "• Modern web technologies",
-                "• Open source contributions",
-                "• Developer tools & productivity",
-                "• Technical content creation",
-                "",
-                "📚 Always learning, always building!",
+                "## Interests",
+                "- Web technologies & scalable systems",
+                "- SaaS, Indie Hacking",
+                "- AI & how it changes how we build",
+                "- Sharing what I learn",
             ],
         },
 
@@ -443,11 +446,11 @@ export function useTerminalCommands() {
                     "╭─────────────────────────────────────────╮",
                     "│            FEATURED PROJECTS            │",
                     "╰─────────────────────────────────────────╯",
-                    "No featured project added at the moment. Visit: https://github.com/bhavesh-chaudhari",
+                    "No featured project added at the moment. Visit: https://github.com/bhaveyx",
                     "",
                 ]
 
-                output.push("🔗 More projects: https://github.com/bhavesh-chaudhari")
+                output.push("🔗 More projects: https://github.com/bhaveyx")
 
                 return output
             },
@@ -461,83 +464,78 @@ export function useTerminalCommands() {
                 "│            CONTACT INFO                 │",
                 "╰─────────────────────────────────────────╯",
                 "",
-                "📧 Email: bhic2030@gmail.com",
-                "🐙 GitHub: https://github.com/bhavesh-chaudhari",
-                "💼 LinkedIn: https://linkedin.com/in/bhaveshc0",
-                "🐦 Twitter: @roninbvhavesh",
-                "🌐 Website: https://www.bhaveshchaudhari.com",
+                `Email: ${CONTACT_EMAIL}`,
+                `GitHub: ${SOCIAL_LINKS.github}`,
+                `LinkedIn: ${SOCIAL_LINKS.linkedin}`,
+                `Twitter: ${SOCIAL_LINKS.twitter}`,
+                `Website: ${WEBSITE_URL}`,
                 "",
-                "💬 Feel free to reach out for:",
-                "• Collaboration opportunities",
-                "• Technical discussions",
-                "• Project consultations",
-                "• Just to say hi! 👋",
             ],
         },
 
-        minimize: {
-            name: "minimize",
-            description: "Minimize terminal",
-            action: () => {
-                minimizeTerminal()
-                return "Terminal minimized. Click the terminal icon to restore."
-            },
-        },
+        // minimize: {
+        //     name: "minimize",
+        //     description: "Minimize terminal",
+        //     action: () => {
+        //         minimizeTerminal()
+        //         return "Terminal minimized. Click the terminal icon to restore."
+        //     },
+        // },
 
-        close: {
-            name: "close",
-            description: "Close terminal",
-            action: () => {
-                setTimeout(() => closeTerminal(), 500)
-                return "Closing terminal... Use Ctrl+` to reopen."
-            },
-        },
+        // close: {
+        //     name: "close",
+        //     description: "Close terminal",
+        //     action: () => {
+        //         setTimeout(() => closeTerminal(), 500)
+        //         return "Closing terminal... Use Ctrl+` to reopen."
+        //     },
+        // },
 
-        opacity: {
-            name: "opacity",
-            description: "Set terminal opacity",
-            usage: "opacity <0-100>",
-            examples: ["opacity 80", "opacity 100"],
-            action: (args) => {
-                if (args.length === 0) {
-                    return (
-                        "Usage: opacity <0-100>. Current opacity: " + Math.round(useTerminalStore.getState().opacity * 100) + "%"
-                    )
-                }
+        // opacity: {
+        //     name: "opacity",
+        //     description: "Set terminal opacity",
+        //     usage: "opacity <0-100>",
+        //     examples: ["opacity 80", "opacity 100"],
+        //     action: (args) => {
+        //         if (args.length === 0) {
+        //             return (
+        //                 "Usage: opacity <0-100>. Current opacity: " + Math.round(useTerminalStore.getState().opacity * 100) + "%"
+        //             )
+        //         }
 
-                const value = Number.parseInt(args[0])
-                if (isNaN(value) || value < 0 || value > 100) {
-                    return "Invalid opacity value. Please use a number between 0 and 100."
-                }
+        //         const value = Number.parseInt(args[0])
+        //         if (isNaN(value) || value < 0 || value > 100) {
+        //             return "Invalid opacity value. Please use a number between 0 and 100."
+        //         }
 
-                setOpacity(value / 100)
-                return `Terminal opacity set to ${value}%`
-            },
-        },
+        //         setOpacity(value / 100)
+        //         return `Terminal opacity set to ${value}%`
+        //     },
+        // },
 
-        reset: {
-            name: "reset",
-            description: "Reset terminal position and size",
-            action: () => {
-                resetTerminal()
-                return "Terminal position and size reset to defaults."
-            },
-        },
+        // reset: {
+        //     name: "reset",
+        //     description: "Reset terminal position and size",
+        //     action: () => {
+        //         resetTerminal()
+        //         return "Terminal position and size reset to defaults."
+        //     },
+        // },
 
-        theme: {
-            name: "theme",
-            description: "Toggle terminal theme",
-            action: () => {
-                const newTheme = terminalTheme === "retro" ? "modern" : "retro"
-                setTerminalTheme(newTheme)
+        // theme: {
+        //     name: "theme",
+        //     description: "Toggle terminal theme",
+        //     action: () => {
+        //         const newTheme = terminalTheme === "retro" ? "modern" : "retro"
+        //         setTerminalTheme(newTheme)
 
-                if (newTheme === "modern") {
-                    setTheme(theme === "dark" ? "light" : "dark")
-                }
+        //         if (newTheme === "modern") {
+        //             setTheme(theme === "dark" ? "light" : "dark")
+        //         }
 
-                return `Terminal theme switched to: ${newTheme} ${newTheme === "retro" ? "(green on black)" : "(modern colors)"}`
-            },
-        },
+        //         return `Terminal theme switched to: ${newTheme} ${newTheme === "retro" ? "(green on black)" : "(modern colors)"}`
+        //     },
+        // },
 
         clear: {
             name: "clear",
@@ -549,7 +547,7 @@ export function useTerminalCommands() {
             name: "open",
             description: "Open blog post or navigate to page",
             usage: "open <target>",
-            examples: ["open blog 1", "open portfolio", "open github"],
+            examples: ["open blog 1", "open twitter", "open github"],
             action: async (args) => {
                 if (args.length === 0) {
                     return [
@@ -557,13 +555,13 @@ export function useTerminalCommands() {
                         "",
                         "Available targets:",
                         "• blog <number>  - Open specific blog post",
-                        "• portfolio      - Go to portfolio page",
+                        "• twitter         - Open Twitter profile",
                         "• github         - Open GitHub profile",
                         "• linkedin       - Open LinkedIn profile",
                         "",
                         "Examples:",
                         "  open blog 1",
-                        "  open portfolio",
+                        "  open twitter",
                         "  open github",
                     ]
                 }
@@ -588,23 +586,23 @@ export function useTerminalCommands() {
                     return `Opening: ${post.title}`
                 }
 
-                if (target === "portfolio") {
+                if (target === "twitter" || target === "x") {
                     setTimeout(() => {
-                        router.push("/portfolio")
+                        window.open(SOCIAL_LINKS.twitter, "_blank")
                     }, 1000)
-                    return "Navigating to portfolio..."
+                    return "Opening Twitter profile..."
                 }
 
                 if (target === "github") {
                     setTimeout(() => {
-                        window.open("https://github.com/bhavesh-chaudhari", "_blank")
+                        window.open(SOCIAL_LINKS.github, "_blank")
                     }, 1000)
                     return "Opening GitHub profile..."
                 }
 
                 if (target === "linkedin") {
                     setTimeout(() => {
-                        window.open("https://linkedin.com/in/bhavesh-chaudhari", "_blank")
+                        window.open(SOCIAL_LINKS.linkedin, "_blank")
                     }, 1000)
                     return "Opening LinkedIn profile..."
                 }
@@ -617,7 +615,7 @@ export function useTerminalCommands() {
             name: "goto",
             description: "Navigate to different pages",
             usage: "goto <page>",
-            examples: ["goto portfolio", "goto blog", "goto search"],
+            examples: ["goto blog"],
             action: async (args) => {
                 if (args.length === 0) {
                     return [

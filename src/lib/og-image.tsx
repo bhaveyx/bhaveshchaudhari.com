@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og"
 import type { BlogPost } from "./blog"
+import { WEBSITE_DOMAIN } from "@/constants"
 
 export const runtime = "edge"
 
@@ -11,16 +12,16 @@ interface OGImageProps {
     category?: string
     tags?: string[]
     type?: "blog" | "homepage" | "page"
+    publishedAt?: string
 }
 
 export async function generateOGImage({
     title,
     description,
     author = "Bhavesh Chaudhari",
-    authorImage = "https://github.com/bhavesh-chaudhari.png",
-    category,
-    tags = [],
+    authorImage = "https://pbs.twimg.com/profile_images/1940107426335690752/RZh81wHs_400x400.jpg",
     type = "blog",
+    publishedAt,
 }: OGImageProps) {
     try {
         return new ImageResponse(
@@ -48,7 +49,63 @@ export async function generateOGImage({
                         marginBottom: "40px",
                     }}
                 >
-                    <div
+                    {
+                        type === "blog" && <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "16px",
+                            }}
+                        >
+                            {authorImage && (
+                                <img
+                                    src={authorImage}
+                                    alt={author}
+                                    style={{
+                                        width: "75px",
+                                        height: "75px",
+                                        borderRadius: "50%",
+                                        border: "3px solid #10b981",
+                                    }}
+                                />
+                            )}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "4px",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        fontSize: "30px",
+                                        fontWeight: "600",
+                                        color: "#111827",
+                                    }}
+                                >
+                                    {author}
+                                </div>
+                                {
+                                    publishedAt && <div
+                                        style={{
+                                            fontSize: "22px",
+                                            color: "#6b7280",
+                                        }}
+                                    >
+                                        {
+                                            publishedAt
+                                        }
+                                        {/* {new Date().toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                })} */}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    {/* <div
                         style={{
                             display: "flex",
                             alignItems: "center",
@@ -95,9 +152,9 @@ export async function generateOGImage({
                                 Developer & Tech Writer
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
-                    {category && (
+                    {/* {category && (
                         <div
                             style={{
                                 backgroundColor: "#d1fae5",
@@ -110,7 +167,7 @@ export async function generateOGImage({
                         >
                             {category}
                         </div>
-                    )}
+                    )} */}
                 </div>
 
                 <div
@@ -124,7 +181,7 @@ export async function generateOGImage({
                 >
                     <h1
                         style={{
-                            fontSize: type === "homepage" ? "64px" : "48px",
+                            fontSize: type === "homepage" ? "64px" : "54px",
                             fontWeight: "600",
                             color: "#111827",
                             lineHeight: "1.1",
@@ -135,7 +192,7 @@ export async function generateOGImage({
                         {title}
                     </h1>
 
-                    {description && (
+                    {type !== "blog" && description && (
                         <p
                             style={{
                                 fontSize: "24px",
@@ -148,7 +205,7 @@ export async function generateOGImage({
                             {description.length > 150 ? `${description.substring(0, 150)}...` : description}
                         </p>
                     )}
-
+                    {/* 
                     {tags.length > 0 && (
                         <div
                             style={{
@@ -173,7 +230,7 @@ export async function generateOGImage({
                                 </div>
                             ))}
                         </div>
-                    )}
+                    )} */}
                 </div>
 
                 <div
@@ -187,7 +244,7 @@ export async function generateOGImage({
                         borderTop: "2px solid #e5e7eb",
                     }}
                 >
-                    <div
+                    {/* <div
                         style={{
                             display: "flex",
                             alignItems: "center",
@@ -234,16 +291,17 @@ export async function generateOGImage({
                                 })}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div
                         style={{
-                            fontSize: "16px",
+                            fontSize: "20px",
                             color: "#10b981",
                             fontWeight: "500",
+                            display: "flex",
                         }}
                     >
-                        www.bhaveshchaudhari.com
+                        www.{WEBSITE_DOMAIN}
                     </div>
                 </div>
 
@@ -252,15 +310,15 @@ export async function generateOGImage({
                         position: "absolute",
                         top: "0",
                         right: "0",
-                        width: "200px",
-                        height: "200px",
+                        width: "300px",
+                        height: "300px",
                         background: "linear-gradient(135deg, #10b981, #059669)",
                         opacity: "0.1",
                         borderRadius: "50%",
                         transform: "translate(50%, -50%)",
                     }}
                 />
-                <div
+                {/* <div
                     style={{
                         position: "absolute",
                         bottom: "0",
@@ -272,7 +330,7 @@ export async function generateOGImage({
                         borderRadius: "50%",
                         transform: "translate(-50%, 50%)",
                     }}
-                />
+                /> */}
             </div>,
             {
                 width: 1200,
@@ -313,7 +371,7 @@ export async function generateOGImage({
 
 export function generateBlogPostOGImage(post: BlogPost) {
     console.log("Generating OG image for blog post:", post.title)
-    
+
     return generateOGImage({
         title: post.title,
         description: post.excerpt,
@@ -322,13 +380,14 @@ export function generateBlogPostOGImage(post: BlogPost) {
         category: post.category,
         tags: post.tags,
         type: "blog",
+        publishedAt: post.publishedAt
     })
 }
 
 export function generateHomepageOGImage() {
     return generateOGImage({
-        title: "Bhavesh Chaudhari - Developer & Tech Writer",
-        description: "Passionate developer sharing insights about web development, technology, and programming.",
+        title: "Bhavesh Chaudhari",
+        description: "Building things, exploring, and writing it down.",
         type: "homepage",
     })
 }

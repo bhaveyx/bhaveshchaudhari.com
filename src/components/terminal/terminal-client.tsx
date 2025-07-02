@@ -71,7 +71,7 @@ export function TerminalClient({
         }
 
         const bootSequence = [
-            "Initializing BhaveshOS Terminal v2.0.24...",
+            "Initializing BhaveshOS Terminal v1.0.0...",
             "",
             "Welcome! Type 'help' to see available commands.",
             "",

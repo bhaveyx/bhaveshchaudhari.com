@@ -12,51 +12,43 @@ import {
     XCircleIcon,
 } from "lucide-react";
 import { CodeHighlighter } from "./syntax-highlighter";
-import { createSlug } from "@/lib/utils";
+import { Tweet } from "react-tweet";
+import { CopyableHeading } from "./copyable-heading";
 
 export const mdxComponents = {
-    h1: ({ ...props }) => (
-        <h1
-            className="text-4xl font-bold text-gray-900 dark:text-white mt-12 mb-6 leading-tight scroll-mt-24"
-            {...props}
-        />
+    h1: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h1" className="text-4xl font-bold text-gray-900 dark:text-white mt-12 mb-6 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
 
-    h2: ({ ...props }) => (
-        <h2
-            className="text-3xl font-bold text-gray-900 dark:text-white mt-10 mb-5 leading-tight scroll-mt-24"
-            id={createSlug(String(props.children))}
-            {...props}
-        />
+    h2: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h2" className="text-3xl font-bold text-gray-900 dark:text-white mt-6 mb-6 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
-    h3: ({ ...props }) => (
-        <h3
-            className="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4 leading-tight scroll-mt-24"
-            id={createSlug(String(props.children))}
-            {...props}
-        />
+    h3: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h3" className="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
 
-    h4: ({ ...props }) => (
-        <h4
-            className="text-xl font-semibold text-gray-900 dark:text-white mt-6 mb-3 leading-tight scroll-mt-24"
-            id={createSlug(String(props.children))}
-            {...props}
-        />
+    h4: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h4" className="text-xl font-semibold text-gray-900 dark:text-white mt-6 mb-3 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
 
-    h5: ({ ...props }) => (
-        <h5
-            className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-2 leading-tight scroll-mt-24"
-            {...props}
-        />
+    h5: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h5" className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-2 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
 
-    h6: ({ ...props }) => (
-        <h6
-            className="text-base font-semibold text-gray-900 dark:text-white mt-6 mb-2 leading-tight scroll-mt-24"
-            {...props}
-        />
+    h6: ({ children, ...props }: { children: React.ReactNode }) => (
+        <CopyableHeading as="h6" className="text-base font-semibold text-gray-900 dark:text-white mt-6 mb-2 leading-tight scroll-mt-24" {...props} >
+            {children}
+        </CopyableHeading>
     ),
 
     p: ({ children, ...props }: { children: React.ReactNode }) => (
@@ -94,7 +86,7 @@ export const mdxComponents = {
 
     blockquote: ({ children, ...props }: { children: React.ReactNode }) => (
         <blockquote
-            className="border-l-4 border-emerald-500 pl-6 italic text-gray-700 dark:text-gray-300 my-8 bg-emerald-50 dark:bg-emerald-900/20 py-4 rounded-r-lg"
+            className="border-l-4 border-emerald-500 px-6 italic text-gray-700 dark:text-gray-300 my-8 bg-emerald-50 dark:bg-emerald-900/20 py-4 rounded-r-lg [&_*]:mb-0"
             {...props}
         >
             {children}
@@ -141,7 +133,7 @@ export const mdxComponents = {
             alt={alt}
             width={800}
             height={400}
-            className="rounded-lg shadow-lg my-8 w-full h-auto"
+            className="rounded-lg border my-6 md:my-8 w-full h-auto"
             {...props}
         />
     ),
@@ -313,6 +305,14 @@ export const mdxComponents = {
             >
                 {children}
             </Button>
+        );
+    },
+
+    Tweet: ({ id }: { id: string }) => {
+        return (
+            <div className="flex justify-center">
+                <Tweet id={id} />
+            </div>
         );
     },
 };

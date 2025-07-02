@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import type { BlogPost } from './blog';
+import { WEBSITE_URL } from '@/constants';
 
-const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bhaveshchaudhari.com';
 const siteName = 'Bhavesh Chaudhari';
 const defaultDescription =
-    'Passionate developer sharing insights about web development, technology, and programming.';
+    " I love to build things with my code. In an era where AI is reshaping everything, and will keep doing so faster than we can imagine, I want this space to be a living journal of my thoughts, experiments, and the lessons I pick up along the way as I progress and lay the foundation for something bigger.";
 
 interface OGConfig {
     title: string;
@@ -32,10 +31,10 @@ export function generateOGMetadata({
     tags,
     section,
 }: OGConfig): Metadata {
-    const fullUrl = `${siteUrl}${url}`;
+    const fullUrl = `${WEBSITE_URL}${url}`;
     const ogImage =
         image ||
-        `${siteUrl}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
+        `${WEBSITE_URL}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
 
     const metadata: Metadata = {
         title,
@@ -76,7 +75,7 @@ export function generateOGMetadata({
             type: 'article',
             publishedTime,
             modifiedTime,
-            authors: authors?.map(() => `${siteUrl}/about`),
+            authors: authors?.map(() => `${WEBSITE_URL}/about`),
             tags,
             section,
         };
@@ -85,29 +84,11 @@ export function generateOGMetadata({
     return metadata;
 }
 
-export function generateBlogPostMetadata(post: BlogPost): Metadata {
-    const url = `/blogs/${post.slug}`;
-    const ogImageUrl = `${siteUrl}/api/og/blog/${post.slug}`;
-
-    return generateOGMetadata({
-        title: `${post.title} | ${siteName}`,
-        description: post.metaDescription || post.excerpt,
-        url,
-        image: ogImageUrl,
-        type: 'article',
-        publishedTime: post.publishedAt,
-        modifiedTime: post.publishedAt,
-        authors: [post.author],
-        tags: post.tags,
-        section: post.category,
-    });
-}
-
 export function generateHomepageMetadata(): Metadata {
-    const ogImageUrl = `${siteUrl}/api/og/homepage`;
+    const ogImageUrl = `${WEBSITE_URL}/api/og/homepage`;
 
     return generateOGMetadata({
-        title: `${siteName} - Developer & Tech Writer`,
+        title: `${siteName}`,
         description: defaultDescription,
         url: '',
         image: ogImageUrl,
@@ -115,35 +96,9 @@ export function generateHomepageMetadata(): Metadata {
     });
 }
 
-export function generateBlogListMetadata(): Metadata {
-    const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent('Tech Blog')}&description=${encodeURIComponent('Latest insights about web development, technology, and programming')}`;
-
-    return generateOGMetadata({
-        title: `Blog | ${siteName}`,
-        description:
-            'Latest insights about web development, technology, and programming.',
-        url: '/blogs',
-        image: ogImageUrl,
-        type: 'website',
-    });
-}
-
-export function generateSearchMetadata(): Metadata {
-    const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent('Search Articles')}&description=${encodeURIComponent('Find articles by title, content, category or tags')}`;
-
-    return generateOGMetadata({
-        title: `Search | ${siteName}`,
-        description: 'Find articles by title, content, category or tags.',
-        url: '/blogs/search',
-        image: ogImageUrl,
-        type: 'website',
-    });
-}
-
-// Utility function to generate structured data for blog posts
 export function generateBlogPostStructuredData(post: BlogPost) {
-    const fullUrl = `${siteUrl}/blogs/${post.slug}`;
-    const ogImageUrl = `${siteUrl}/api/og/blog/${post.slug}`;
+    const fullUrl = `${WEBSITE_URL}/blogs/${post.slug}`;
+    const ogImageUrl = `${WEBSITE_URL}/api/og/blog/${post.slug}`;
 
     return {
         '@context': 'https://schema.org',
@@ -155,14 +110,14 @@ export function generateBlogPostStructuredData(post: BlogPost) {
             '@type': 'Person',
             name: post.author,
             image: post.authorImage,
-            url: `${siteUrl}/about`,
+            url: `${WEBSITE_URL}`,
         },
         publisher: {
             '@type': 'Person',
             name: siteName,
             logo: {
                 '@type': 'ImageObject',
-                url: `${siteUrl}/logo.png`,
+                url: `${WEBSITE_URL}/favicon.ico`,
             },
         },
         datePublished: post.publishedAt,

@@ -1,0 +1,137 @@
+---
+title: "AI Won’t Make You Obsolete. But You Might."
+publishedAt: "2025-07-03"
+excerpt: "AI won’t replace you, but shallow work will. Use it without losing your skills or curiosity."
+category: "Think piece"
+tags: ["AI"]
+metaDescription: "AI won’t replace you, but shallow work will. Use it without losing your skills or curiosity."
+keywords: ["ai"]
+featured: true
+author: "Bhavesh Chaudhari"
+authorImage: "https://github.com/bhavesh-chaudhari.png"
+---
+
+We are watching software development get reinvented in real time. It's the biggest change since compilers became a thing in the '50s. The way we write [software is changing again](https://www.youtube.com/watch?v=LCEmiRjPEtQ), and using AI has quickly gone from being optional to basically required.
+
+We are shipping things faster, writing cleaner code, and even beginners can finish tasks in minutes. But this is just the start. If the trend we’re seeing continues, these AI assistants are only going to get more accurate, convenient, and capable of handling complex work on their own.
+
+![The length of tasks AI can do is doubling every 7 months, source: METR](/blog/1/the-length-of-ai-doings-tasks-metr.png)
+
+Yet beneath this revolution, lies a reality we need to acknowledge and adapt to.
+
+## The AI productivity paradox
+
+We thought AI would save us time. Yet for many people, it is costing them their skills.
+
+This is the paradox of AI, the very thing that promise to make us more productive can quietly erode the understanding that makes us valuable.
+
+Just a few years ago, our way of learning to code as a programmer was a slow but formative journey, watching YouTube tutorials, googling endlessly, checking MDN, reading documentation, and countless visits to Stack Overflow. The process built our understanding.
+
+At that time, the idea of AIs generating working code sounded like a sci-fi. Yet here we are, July 2025, and programmers have an arsenal of powerful coding assistants. Tools like cursor, windsurf, github copilot, claude code, openai codex and now the gemini cli introduced just a couple of days ago as I write this blog have been adopted and is being used by millions to [vibe code](https://en.wikipedia.org/wiki/Vibe_coding).
+
+These tools are transformative, they help us build faster and even help tackle issues that would have taken days or [maybe years](https://www.reddit.com/r/ClaudeAI/comments/1kvgg7s/claude_opus_solved_my_white_whale_bug_today_that/). But there’s a catch. When every developer has the same powerful tools, speed alone is no longer what sets us apart. Worse, if we don’t truly understand the code these AIs produce, over time we risk losing the very skills that makes us. It’s a phenomenon reminiscent of the cycle of civilization, which I mentioned in a recent [tweet](https://x.com/bhaveyx/status/1932371677817782397):
+
+<a
+  href="https://x.com/bhaveyx/status/1932371677817782397"
+  target="_blank"
+  rel="noreferrer noopener"
+>
+  ![The paradox of AI productivity](/blog/1/cycle-of-civilization-tweet.webp)
+</a>
+
+That's the double edged sword of modern programming. The same AI that can make you 10x faster can make you 10x replaceable if leant on without understanding.
+
+## Why This Matters
+
+Some might argue this isn’t a real problem. After all, if AI becomes fully autonomous, isn't it fine to just move fast, have high agency, and not worry about understanding the details? If it works out of the box, what's the harm?
+
+But here's the catch, **agency without understanding is fragile**. You lose the ability to innovate beyond what the AI suggests, because you can't build on the knowledge you don't have.
+
+And this isn't just theoretical. The internet is already filled with people sharing their experiences about how it has been affecting their cognitive capabilities.
+
+![people's opinion on effect of ai on brain](/blog/1/people-opinion-ai-making-us-dumb.webp)
+
+According to the stackoverflow 2024 [survey](https://survey.stackoverflow.co/2024/ai), approx. 76% of all respondents were already using or plan to use AI in their development workflow. That was an year ago, and given how quickly AI is advancing, it’s almost certain that the number is even higher today.
+
+Consider what this means at scale, as millions of developers increasingly rely on AI without building their own understanding, the collective knowledge and craftsmanship of our industry risk stagnating, or worse, regressing.
+
+<img
+  className="my-6 border rounded-lg w-auto max-h-[400px] mx-auto h-auto"
+  src="/blog/1/ai-human-meme.jpg"
+/>
+
+The risks aren’t just hypothetical either, a quick search for `OPENAI_API_KEY` on [github](https://github.com/search) and you’ll find dozens of public repositories accidentally leaking real API keys. This code is likely commited by vibe coders who don't recognize what they are doing.
+
+![Leaked OpenAI secret example 1](/blog/1/vibe-coders-leaked-secret.webp)
+![Leaked OpenAI secret example 2](/blog/1/leaked_key_on_github_example.webp)
+
+And it’s not just anecdotal evidence. A recent MIT brain scan study revealed something alarming about the way AI affects our minds.
+
+Over four months, researchers found:
+
+- 83.3% of ChatGPT users couldn’t recall what they’d written minutes earlier. They’d outsourced the thinking, and their brains simply didn’t register the content.
+- Brain scans revealed neural connections collapsing from 79 to just 42, a staggering 47% reduction in connectivity.
+
+And perhaps most concerning:
+
+> When researchers forced AI users to write without assistance, they performed worse than people who never used AI at all. It’s not just dependency. It’s cognitive atrophy, like a muscle forgetting how to work.
+
+You can find more details about the study here:
+
+<Tweet id="1935343874421178762" />
+
+This makes it evident that the way we use AI will decide whether we become faster, smarter engineers, or obsolete humans trapped by [cognitive offloading](https://www.mdpi.com/2075-4698/15/1/6).
+
+## Where Developers Go Wrong with AI
+
+The biggest mistake developers make today is blindly trusting AI. Often, they think they can just copy what their coding assistant generates and move on. But code generated without understanding is code you can't own. And code you can't own is a ticking time bomb.
+
+I’ve experienced this firsthand. While reviewing PRs, I have came across ton of AI written code and at this point I have learned to recognize it.
+
+While there’s nothing wrong with using AI and it should be encouraged, more often than not, many developers rely on it so heavily that they forget to verify whether the generated code actually fits their project’s needs, the most common mistakes I see include:
+
+1. **Not following the project guidelines**: AI often suggests generic code that doesn’t follow conventions, naming, structure, or patterns, which creates inconsistencies that rot the codebase over time.
+2. **Not referencing existing code**: Instead of reusing abstractions or functions already present in the project, AI-generated snippets frequently reinvent the wheel, leading to repetitive, duplicated code.
+3. **Not understanding what’s written** - This is the most dangerous mistake. The consequences become obvious during code reviews, often times developers have no idea why this was done or was written the way it is.
+
+This isn't just my experience. I’ve heard similar stories from friends. The economic incentives make this worse. In any organzation, velocity is rewarded (it puts food on the plate) so sometimes the code quality or tech debt gets sidelined (which can be fine in the short term), but comprehension should never be negotiable, it unintentionally encourages shallow work and ultimately hurts the dynamics of long-term progress.
+
+That’s why it’s not enough to just generate code, you need to own it
+
+---
+
+## Use AI As A Multiplier, Not A Substitute
+
+So if how we use AI is what truly determines our growth, how can we harness it such that it doesn't dull our skills our judgement?
+
+The answer lies in being an active user of AI, not a passive consumer.
+
+Using AI well, doesn't mean substituting your thinking, it means multiplying it. AI should accelerate your growth, not stunt it. Only when you understand and can confidently build upon what AI generates will you truly benefit from its power.
+
+So how can we wield AI effectively?
+
+- Use the [human in the loop](https://en.wikipedia.org/wiki/Human-in-the-loop) approach. You, not the AI, are responsible for the final output. Review, test, and validate every AI-generated suggestion before adding it to your codebase or atleast before going live with it.
+- Ask better prompts, give detailed content, constraints and expectations. Your results are only as good as the context you give.
+- Think about the implementation by yourself first, then see what AI comes up with and compare. This helps you grow your problem solving skills instead of bypassing them.
+- Verify the output: Coding assistants like claude code, gemini cli, etc. are prompted [e.g. see Gemini CLI system prompt](https://github.com/google-gemini/gemini-cli/blob/main/packages/core/src/core/prompts.ts#L61) to verify the written code it's giving, it does so by either running any test setup present in the project, or by running build commands, etc. But as of now, they’re far from perfect, they still hallucinate and make mistakes. You must take responsibility for reviewing what’s actually happening.
+  <Tweet id="1937517664907460980" />
+- Iterate on AI suggestions. Don’t just copy paste the first solution the assistant gives you, let it be a starting point, experiment with different requirements, and compare multiple versions to find the best balance of readability, performance, and maintainability. The benefit of iterating multiple times is that it deepens your understanding and helps you make AI a true copilot, not just a code generator.
+- Understand how AIs work, the coding assistants you use are basically AI agents so learn and understand how [AI agents are built](https://www.youtube.com/watch?v=LP5OCa20Zpg). This helps you recognize their strengths and limitations which will help you better use AI without misplaced trust.
+
+## Build Habits to Stay Ahead
+
+All of this leads to one simple but crucial takeaway, your growth as a developer cannot stop at knowing how to prompt an AI. The true differentiator is your ability to continuously learn, adapt, and expand your understanding of the fundamentals and the evolving ecosystem.
+
+- **Stay Curious**. Make it a habit to explore beyond what’s immediately needed for your tasks. Read papers, try out new frameworks, follow tech leaders, or experiment with emerging tools.
+- **Understanding over speed**. Speed is seductive, but comprehension compounds. Make it a habit to pause and dive deeper into why something works. Write explanations for yourself or others, teaching is one of the fastest ways to solidify knowledge.
+- Surround yourself with other curious people. A curious circle will keep you inspired and accountable. Personally, I like to follow builders and experimenters on platforms like X(Twitter)/YouTube for the same.
+
+The bottom line is this, if you **keep your curiosity alive**, you'll stay relevant. In times of rapid change, those who stay at the front, curious, are the ones who lead.
+
+## Conclusion
+
+AI isn’t going away, and that’s a good thing. We’re living in an extraordinary time where our potential as developers can be multiplied like never before. But as we’ve seen, AI can just as easily dull our skills if we lean on it mindlessly.
+
+The real opportunity is to use AI intentionally, as an amplifier for our creativity, not a crutch for our thinking. That means staying curious, questioning the outputs of our tools, and making understanding our priority over raw speed. It means building habits that keep us learning so we don’t just adapt to change, we lead it.
+
+Embrace the paradox.
