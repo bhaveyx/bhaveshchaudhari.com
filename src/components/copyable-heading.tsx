@@ -26,7 +26,7 @@ export function CopyableHeading({ as: Tag, children, className, ...props }: Copy
             {children}
             <button
                 onClick={handleCopy}
-                className="absolute -left-10 cursor-pointer top-1/2 -translate-y-1/2 p-2 rounded-md opacity-0 group-hover:bg-green-50 group-hover:opacity-100 transition-opacity duration-200"
+                className="absolute -left-10 cursor-pointer top-1/2 -translate-y-1/2 p-2 rounded-md opacity-0 group-hover:bg-gray-50 dark:group-hover:bg-green-50/10  group-hover:opacity-100 transition-opacity duration-200"
                 aria-label="Copy link"
             >
                 {isCopied ? (

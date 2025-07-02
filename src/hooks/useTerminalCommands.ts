@@ -66,7 +66,7 @@ export function useTerminalCommands() {
                     "  contact         - Get my contact information",
                     "",
                     "## Navigation:",
-                    "  open <target>   - Open blog post or other available targets (type open to see options)",
+                    "  open <target>   - Open blog post or other available targets",
                     "  goto <page>     - Navigate to different pages",
                     "",
                     "## Blog & Content:",
@@ -547,7 +547,7 @@ export function useTerminalCommands() {
             name: "open",
             description: "Open blog post or navigate to page",
             usage: "open <target>",
-            examples: ["open blog 1", "open twitter", "open github"],
+            examples: ["open blog 1", "open twitter", "open github", "open linkedin"],
             action: async (args) => {
                 if (args.length === 0) {
                     return [

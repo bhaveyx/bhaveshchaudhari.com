@@ -82,7 +82,7 @@ export function BlogLayout({ children, post }: BlogLayoutProps) {
                         <div className="sticky top-24 space-y-8">
                             <TableOfContents tocItems={post.toc} />
 
-                            <div className="border bg-emerald-50/50 rounded-lg p-6 md:p-4">
+                            <div className="border bg-emerald-50/50 dark:bg-green-900/10 rounded-lg p-6 md:p-4">
                                 <div className="flex flex-col items-center gap-6 mb-4">
                                     <Image
                                         src={post.authorImage || "/placeholder.svg"}
