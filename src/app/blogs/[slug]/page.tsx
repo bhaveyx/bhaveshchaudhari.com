@@ -5,6 +5,7 @@ import type { Metadata } from "next"
 import { compileBlogPost } from "@/lib/mdx-utils"
 import { BlogErrorBoundary } from "@/components/error-boundary"
 import { generateBlogPostStructuredData } from "@/lib/og-utils"
+import { WEBSITE_URL } from "@/constants"
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>
@@ -20,10 +21,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     const post = getBlogPost(slug)
 
     if (!post) {
-        return {
-            title: "Post Not Found",
-        }
+        notFound()
     }
+
+    const ogImageUrl = `${WEBSITE_URL}/api/og/blog/${post.slug}`;
 
     return {
         title: post.title,
@@ -37,11 +38,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             publishedTime: post.publishedAt,
             authors: [post.author],
             tags: post.tags,
+            images: [
+                {
+                    url: ogImageUrl,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
         },
         twitter: {
             card: "summary_large_image",
             title: post.title,
             description: post.excerpt,
+            images: ogImageUrl
         },
     }
 }

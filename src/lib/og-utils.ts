@@ -17,6 +17,7 @@ interface OGConfig {
     authors?: string[];
     tags?: string[];
     section?: string;
+    keywords?: string[];
 }
 
 export function generateOGMetadata({
@@ -30,6 +31,7 @@ export function generateOGMetadata({
     authors,
     tags,
     section,
+    keywords
 }: OGConfig): Metadata {
     const fullUrl = `${WEBSITE_URL}${url}`;
     const ogImage =
@@ -39,6 +41,7 @@ export function generateOGMetadata({
     const metadata: Metadata = {
         title,
         description,
+        keywords: keywords?.join(", ") || tags?.join(', '),
         openGraph: {
             title,
             description,
@@ -91,6 +94,19 @@ export function generateHomepageMetadata(): Metadata {
         title: `${siteName}`,
         description: defaultDescription,
         url: '',
+        image: ogImageUrl,
+        type: 'website',
+    });
+}
+
+export function generateBlogListMetadata(): Metadata {
+    const ogImageUrl = `${WEBSITE_URL}/api/og?title=${encodeURIComponent('Tech Blog')}&description=${encodeURIComponent('Latest insights about web development, technology, and programming')}`;
+
+    return generateOGMetadata({
+        title: `Blog - ${siteName}`,
+        description:
+            'Thoughts and Insights by Bhavesh Chaudhari.',
+        url: '/blogs',
         image: ogImageUrl,
         type: 'website',
     });

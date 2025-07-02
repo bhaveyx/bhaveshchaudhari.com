@@ -387,7 +387,7 @@ export function generateBlogPostOGImage(post: BlogPost) {
 export function generateHomepageOGImage() {
     return generateOGImage({
         title: "Bhavesh Chaudhari",
-        description: "Building things, exploring, and writing it down.",
+        description: "Programmer. Bringing Ideas To Life. Δ ThinkLearnExecute.",
         type: "homepage",
     })
 }
