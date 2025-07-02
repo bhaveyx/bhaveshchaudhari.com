@@ -51,7 +51,7 @@ export default function RootLayout({
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-                <meta name="apple-mobile-web-app-title" content="bhaveshchaudhari.com" />
+                <meta name="apple-mobile-web-app-title" content="Bhavesh Chaudhari" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
                 <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
