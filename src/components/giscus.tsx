@@ -18,7 +18,7 @@ export function GiscusComments() {
                 }
             },
             {
-                rootMargin: "1000px", // Load 1000px before it enters the viewport
+                rootMargin: "3000px", // Load 3000px before it enters the viewport
             }
         )
 
