@@ -4,7 +4,7 @@ import { WEBSITE_URL } from '@/constants';
 
 const siteName = 'Bhavesh Chaudhari';
 const defaultDescription =
-    " I love to build things with my code. In an era where AI is reshaping everything, and will keep doing so faster than we can imagine, I want this space to be a living journal of my thoughts, experiments, and the lessons I pick up along the way as I progress and lay the foundation for something bigger.";
+    "I love to build things with my code. In an era where AI is reshaping everything, and will keep doing so faster than we can imagine, I am using this space as a living journal of my thoughts, experiments, and the lessons I pick up along the way as I progress and lay the foundation for something bigger.";
 
 interface OGConfig {
     title: string;
