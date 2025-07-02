@@ -192,7 +192,7 @@ export async function generateOGImage({
                         {title}
                     </h1>
 
-                    {type !== "blog" && description && (
+                    {description && (
                         <p
                             style={{
                                 fontSize: "24px",

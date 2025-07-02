@@ -37,15 +37,15 @@ export function GiscusComments() {
         <div ref={ref} className="mt-12">
             {loadGiscus && (
                 <Giscus
-                    repo="bhavesh-chaudhari/bhavesh-chaudhari"
-                    repoId="MDEwOlJlcG9zaXRvcnkzOTMyNTU3MTg="
-                    category="Announcements"
-                    categoryId="DIC_kwDOF3CbJs4CN9w8"
+                    repo="bhaveyx/bhaveshchaudhari.com"
+                    repoId="R_kgDONrCQLg"
+                    category="General"
+                    categoryId="DIC_kwDONrCQLs4CsVN6"
                     theme={theme}
                     mapping="title"
                     term="Welcome !"
                     reactionsEnabled="1"
-                    emitMetadata="1"
+                    emitMetadata="0"
                     inputPosition="top"
                     lang="en"
                 />
