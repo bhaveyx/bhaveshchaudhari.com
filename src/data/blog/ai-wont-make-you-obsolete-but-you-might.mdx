@@ -23,7 +23,7 @@ Yet beneath this revolution, lies a reality we need to acknowledge and adapt to.
 
 We thought AI would save us time. Yet for many people, it is costing them their skills.
 
-This is the paradox of AI, the very thing that promise to make us more productive can quietly erode the understanding that makes us valuable.
+This is the paradox of AI, the very thing that promises to make us more productive can quietly erode the understanding that makes us.
 
 Just a few years ago, our way of learning to code as a programmer was a slow but formative journey, watching YouTube tutorials, googling endlessly, checking MDN, reading documentation, and countless visits to Stack Overflow. The process built our understanding.
 
@@ -36,7 +36,7 @@ These tools are transformative, they help us build faster and even help tackle i
   target="_blank"
   rel="noreferrer noopener"
 >
-  ![The paradox of AI productivity](/blog/1/cycle-of-civilization-tweet.webp)
+  ![The paradox of AI productivity is reminiscent of the cycle of civilization](/blog/1/cycle-of-civilization-tweet.webp)
 </a>
 
 That's the double edged sword of modern programming. The same AI that can make you 10x faster can make you 10x replaceable if leant on without understanding.
@@ -58,6 +58,7 @@ Consider what this means at scale, as millions of developers increasingly rely o
 <img
   className="my-6 border rounded-lg w-auto max-h-[400px] mx-auto h-auto"
   src="/blog/1/ai-human-meme.jpg"
+  alt="Illustration on concern about Artificial Intelligence vs Human Intelligence"
 />
 
 The risks aren’t just hypothetical either, a quick search for `OPENAI_API_KEY` on [github](https://github.com/search) and you’ll find dozens of public repositories accidentally leaking real API keys. This code is likely commited by vibe coders who don't recognize what they are doing.
@@ -86,7 +87,7 @@ This makes it evident that the way we use AI will decide whether we become faste
 
 The biggest mistake developers make today is blindly trusting AI. Often, they think they can just copy what their coding assistant generates and move on. But code generated without understanding is code you can't own. And code you can't own is a ticking time bomb.
 
-I’ve experienced this firsthand. While reviewing PRs, I have came across ton of AI written code and at this point I have learned to recognize it.
+I’ve experienced this firsthand. While reviewing PRs, I have come across a ton of AI written code and by now I have learned to recognize it.
 
 While there’s nothing wrong with using AI and it should be encouraged, more often than not, many developers rely on it so heavily that they forget to verify whether the generated code actually fits their project’s needs, the most common mistakes I see include:
 
@@ -94,17 +95,17 @@ While there’s nothing wrong with using AI and it should be encouraged, more of
 2. **Not referencing existing code**: Instead of reusing abstractions or functions already present in the project, AI-generated snippets frequently reinvent the wheel, leading to repetitive, duplicated code.
 3. **Not understanding what’s written** - This is the most dangerous mistake. The consequences become obvious during code reviews, often times developers have no idea why this was done or was written the way it is.
 
-This isn't just my experience. I’ve heard similar stories from friends. The economic incentives make this worse. In any organzation, velocity is rewarded (it puts food on the plate) so sometimes the code quality or tech debt gets sidelined (which can be fine in the short term), but comprehension should never be negotiable, it unintentionally encourages shallow work and ultimately hurts the dynamics of long-term progress.
+This isn't just my experience. I’ve heard similar stories from friends. The economic incentives make this worse. In any organization, velocity is rewarded (it puts food on the plate) so sometimes the code quality or tech debt gets sidelined (which can be fine in the short term), but comprehension should never be negotiable. It unintentionally encourages shallow work and ultimately hurts the dynamics of long-term progress.
 
-That’s why it’s not enough to just generate code, you need to own it
+That’s why it’s not enough to just generate code, you need to own it.
 
 ---
 
 ## Use AI As A Multiplier, Not A Substitute
 
-So if how we use AI is what truly determines our growth, how can we harness it such that it doesn't dull our skills our judgement?
+So if how we use AI is what truly determines our growth, how can we harness it such that it doesn't dull our skills or judgement?
 
-The answer lies in being an active user of AI, not a passive consumer.
+The answer lies in being an **active user** of AI, not a **passive consumer**.
 
 Using AI well, doesn't mean substituting your thinking, it means multiplying it. AI should accelerate your growth, not stunt it. Only when you understand and can confidently build upon what AI generates will you truly benefit from its power.
 
@@ -113,7 +114,7 @@ So how can we wield AI effectively?
 - Use the [human in the loop](https://en.wikipedia.org/wiki/Human-in-the-loop) approach. You, not the AI, are responsible for the final output. Review, test, and validate every AI-generated suggestion before adding it to your codebase or atleast before going live with it.
 - Ask better prompts, give detailed content, constraints and expectations. Your results are only as good as the context you give.
 - Think about the implementation by yourself first, then see what AI comes up with and compare. This helps you grow your problem solving skills instead of bypassing them.
-- Verify the output: Coding assistants like claude code, gemini cli, etc. are prompted [e.g. see Gemini CLI system prompt](https://github.com/google-gemini/gemini-cli/blob/main/packages/core/src/core/prompts.ts#L61) to verify the written code it's giving, it does so by either running any test setup present in the project, or by running build commands, etc. But as of now, they’re far from perfect, they still hallucinate and make mistakes. You must take responsibility for reviewing what’s actually happening.
+- Verify the output: Coding assistants like claude code, gemini cli, etc. are prompted [e.g. see Gemini CLI's system prompt](https://github.com/google-gemini/gemini-cli/blob/main/packages/core/src/core/prompts.ts#L61) to verify the written code it's giving, it does so by either running any test setup present in the project, or by running build commands, etc. But as of now, they’re far from perfect, they still hallucinate and make mistakes. You must take responsibility for reviewing what’s actually happening.
   <Tweet id="1937517664907460980" />
 - Iterate on AI suggestions. Don’t just copy paste the first solution the assistant gives you, let it be a starting point, experiment with different requirements, and compare multiple versions to find the best balance of readability, performance, and maintainability. The benefit of iterating multiple times is that it deepens your understanding and helps you make AI a true copilot, not just a code generator.
 - Understand how AIs work, the coding assistants you use are basically AI agents so learn and understand how [AI agents are built](https://www.youtube.com/watch?v=LP5OCa20Zpg). This helps you recognize their strengths and limitations which will help you better use AI without misplaced trust.

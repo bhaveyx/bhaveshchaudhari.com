@@ -56,7 +56,7 @@ export function Navbar() {
                         >
                             <li key={"home"}>
                                 <Link
-                                    className="w-full pb-4 md:py-0 leading-none flex flex-row items-center gap-4"
+                                    className="w-full leading-none flex flex-row items-center gap-4"
                                     href={"/"}
                                 >
                                     <Image className="rounded-full" width={30} height={30} src={"https://github.com/bhavesh-chaudhari.png"} alt={"profile image"} />
