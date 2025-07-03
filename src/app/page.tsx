@@ -44,8 +44,8 @@ export default function HomePage() {
                             <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-emerald-600 dark:text-emerald-400">
                                 help
                             </code>{" "}
-                            or 
-                             <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-emerald-600 dark:text-emerald-400">
+                            or {" "}
+                            <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-emerald-600 dark:text-emerald-400">
                                 blog
                             </code>{" "}
                             to get started
