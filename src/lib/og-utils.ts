@@ -112,39 +112,118 @@ export function generateBlogListMetadata(): Metadata {
     });
 }
 
+export function generateHomepageStructuredData() {
+    return [
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": `${WEBSITE_URL}`
+                }
+            ]
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Bhavesh Chaudhari",
+            "url": WEBSITE_URL,
+            "sameAs": [
+                "https://www.github.com/bhaveyx",
+                "https://twitter.com/bhaveyx",
+                "https://linkedin.com/in/bhaveyx",
+                "https://instagram.com/bhaveyx"
+            ],
+            "jobTitle": "Software Engineer & Builder",
+            "description": defaultDescription,
+            "image": "https://www.bhaveshchaudhari.com/assets/profile-pic.jpg"
+        }
+    ];
+}
+
+export function generateBlogListStructuredData() {
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": `${WEBSITE_URL}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": `${WEBSITE_URL}/blogs`
+            }
+        ]
+    };
+}
+
 export function generateBlogPostStructuredData(post: BlogPost) {
     const fullUrl = `${WEBSITE_URL}/blogs/${post.slug}`;
     const ogImageUrl = `${WEBSITE_URL}/api/og/blog/${post.slug}`;
 
-    return {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.excerpt,
-        image: ogImageUrl,
-        author: {
-            '@type': 'Person',
-            name: post.author,
-            image: post.authorImage,
-            url: `${WEBSITE_URL}`,
-        },
-        publisher: {
-            '@type': 'Person',
-            name: siteName,
-            logo: {
-                '@type': 'ImageObject',
-                url: `${WEBSITE_URL}/favicon.ico`,
+    return [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.excerpt,
+            image: ogImageUrl,
+            author: {
+                '@type': 'Person',
+                name: post.author,
+                image: post.authorImage,
+                url: `${WEBSITE_URL}`,
             },
+            publisher: {
+                '@type': 'Person',
+                name: siteName,
+                logo: {
+                    '@type': 'ImageObject',
+                    url: `${WEBSITE_URL}/favicon.ico`,
+                },
+            },
+            datePublished: post.publishedAt,
+            dateModified: post.publishedAt,
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': fullUrl,
+            },
+            keywords: post.keywords.join(', '),
+            articleSection: post.category,
+            wordCount: post.content.split(' ').length,
+            timeRequired: post.readingTime,
         },
-        datePublished: post.publishedAt,
-        dateModified: post.publishedAt,
-        mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': fullUrl,
-        },
-        keywords: post.keywords.join(', '),
-        articleSection: post.category,
-        wordCount: post.content.split(' ').length,
-        timeRequired: post.readingTime,
-    };
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": `${WEBSITE_URL}`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": `${WEBSITE_URL}/blogs`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": post.slug,
+                    "item": fullUrl
+                }
+            ]
+        }
+    ]
 }

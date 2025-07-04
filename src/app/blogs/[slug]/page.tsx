@@ -25,8 +25,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
 
     const ogImageUrl = `${WEBSITE_URL}/api/og/blog/${post.slug}`;
+    const canonicalUrl = `${WEBSITE_URL}/blogs/${post.slug}`;
 
     return {
+        alternates: {
+            canonical: canonicalUrl,
+        },
         title: post.title,
         description: post.metaDescription,
         keywords: post.keywords,
@@ -51,6 +55,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             title: post.title,
             description: post.excerpt,
             images: ogImageUrl
+        },
+        other: {
+            "twitter:data1": post?.author,
+            "twitter:data2": `${post?.readingTime} mins.`,
+            "twitter:label1": "Written by",
+            "twitter:label2": "Reading Time",
         },
     }
 }
