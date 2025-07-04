@@ -1,0 +1,13 @@
+# Bhavesh Chaudhari's Blog
+
+> I love to build things with my code. In an era where AI is reshaping everything, and will keep doing so faster than we can imagine, I am using this space as a living journal of my thoughts, experiments, and the lessons I pick up along the way as I progress and lay the foundation for something bigger.
+
+## Blog Posts
+
+- [AI Won't Make You Obsolete, But You Might](/blogs/ai-wont-make-you-obsolete-but-you-might.md): A post on how AI is changing the software development landscape.
+
+## Socials
+
+- [GitHub](https://www.github.com/bhaveyx)
+- [Twitter](https://twitter.com/bhaveyx)
+- [LinkedIn](https://linkedin.com/in/bhaveyx)
