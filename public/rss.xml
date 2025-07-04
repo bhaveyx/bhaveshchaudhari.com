@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bhavesh Chaudhari - Blog</title>
+    <description>"I love to build things with my code. In an era where AI is reshaping everything, and will keep doing so faster than we can imagine, I am using this space as a living journal of my thoughts, experiments, and the lessons I pick up along the way as I progress and lay the foundation for something bigger.</description>
+    <link>https://www.bhaveshchaudhari.com</link>
+    <language>en-us</language>
+    <managingEditor>bhic2030@gmail.com (Bhavesh Chaudhari)</managingEditor>
+    <webMaster>bhic2030@gmail.com (Bhavesh Chaudhari)</webMaster>
+    <lastBuildDate>Fri, 04 Jul 2025 17:10:45 GMT</lastBuildDate>
+    <atom:link href="https://www.bhaveshchaudhari.com/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title><![CDATA[AI Won’t Make You Obsolete. But You Might.]]></title>
+      <description><![CDATA[In this blog, we learn about the paradox of AI and productivity, exploring why shallow use of AI makes you vulnerable, and how staying curious and intentional can keep your skills sharp in an accelerating world.]]></description>
+      <link>https://www.bhaveshchaudhari.com/blogs/ai-wont-make-you-obsolete-but-you-might</link>
+      <guid>https://www.bhaveshchaudhari.com/blogs/ai-wont-make-you-obsolete-but-you-might</guid>
+      <pubDate>Thu, 03 Jul 2025 00:00:00 GMT</pubDate>
+      <author>Bhavesh Chaudhari</author>
+      <category>Think piece</category>
+      <category>AI</category>
+    </item>
+  </channel>
+</rss>
