@@ -53,5 +53,15 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhaveyx/bhaveshchaudhari.com.git"
+  },
+  "keywords": [],
+  "author": "Bhavesh Chaudhari <bhic2030@gmail.com> (https://github.com/bhaveyx/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhaveyx/bhaveshchaudhari.com/issues"
   }
 }
