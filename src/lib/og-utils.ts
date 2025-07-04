@@ -185,10 +185,6 @@ export function generateBlogPostStructuredData(post: BlogPost) {
             publisher: {
                 '@type': 'Person',
                 name: siteName,
-                logo: {
-                    '@type': 'ImageObject',
-                    url: `${WEBSITE_URL}/favicon.ico`,
-                },
             },
             datePublished: post.publishedAt,
             dateModified: post.publishedAt,
