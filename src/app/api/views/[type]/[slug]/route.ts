@@ -2,10 +2,14 @@ import { adminDb } from "@/lib/firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+interface RouteParams {
+    params: Promise<{ type: string; slug: string }>
+}
+
+export async function GET(request: NextRequest, { params }: RouteParams) {
     try {
-        const { slug } = await params;
-        const viewsDocRef = adminDb.collection("views").doc(slug);
+        const { type, slug } = await params;
+        const viewsDocRef = adminDb.collection("views").doc(type).collection("posts").doc(slug);
         const viewsSnap = await viewsDocRef.get();
         const viewsCount = viewsSnap.data()?.count || 0;
         return NextResponse.json({ views: viewsCount });
@@ -17,10 +21,18 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     }
 }
 
-export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+export async function POST(request: NextRequest, { params }: RouteParams) {
     try {
-        const { slug } = await params;
-        const viewsDocRef = adminDb.collection("views").doc(slug);
+        const { type, slug } = await params;
+
+        if (process.env.NODE_ENV === 'development') {
+            const viewsDocRef = adminDb.collection("views").doc(type).collection("posts").doc(slug);
+            const viewsSnap = await viewsDocRef.get();
+            const viewsCount = viewsSnap.data()?.count || 0;
+            return NextResponse.json({ views: viewsCount });
+        }
+
+        const viewsDocRef = adminDb.collection("views").doc(type).collection("posts").doc(slug);
 
         const viewsSnap = await viewsDocRef.get();
 

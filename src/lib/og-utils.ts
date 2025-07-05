@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { BlogPost } from './blog';
+import type { ThoughtPost } from './thoughts';
 import { WEBSITE_URL } from '@/constants';
 
 const siteName = 'Bhavesh Chaudhari';
@@ -112,6 +113,19 @@ export function generateBlogListMetadata(): Metadata {
     });
 }
 
+export function generateThoughtListMetadata(): Metadata {
+    const ogImageUrl = `${WEBSITE_URL}/api/og?title=${encodeURIComponent('Thoughts')}&description=${encodeURIComponent('Fleeting thoughts and observations.')}`;
+
+    return generateOGMetadata({
+        title: `Thoughts - ${siteName}`,
+        description:
+            'Fleeting thoughts and observations by Bhavesh Chaudhari.',
+        url: '/thoughts',
+        image: ogImageUrl,
+        type: 'website',
+    });
+}
+
 export function generateHomepageStructuredData() {
     return [
         {
@@ -165,6 +179,27 @@ export function generateBlogListStructuredData() {
     };
 }
 
+export function generateThoughtListStructuredData() {
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "home",
+                "item": `${WEBSITE_URL}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "thoughts",
+                "item": `${WEBSITE_URL}/thoughts`
+            }
+        ]
+    };
+}
+
 export function generateBlogPostStructuredData(post: BlogPost) {
     const fullUrl = `${WEBSITE_URL}/blogs/${post.slug}`;
     const ogImageUrl = `${WEBSITE_URL}/api/og/blog/${post.slug}`;
@@ -174,7 +209,7 @@ export function generateBlogPostStructuredData(post: BlogPost) {
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
             headline: post.title,
-            description: post.excerpt,
+
             image: ogImageUrl,
             author: {
                 '@type': 'Person',
@@ -192,8 +227,7 @@ export function generateBlogPostStructuredData(post: BlogPost) {
                 '@type': 'WebPage',
                 '@id': fullUrl,
             },
-            keywords: post.keywords.join(', '),
-            articleSection: post.category,
+
             wordCount: post.content.split(' ').length,
             timeRequired: post.readingTime,
         },
@@ -212,6 +246,64 @@ export function generateBlogPostStructuredData(post: BlogPost) {
                     "position": 2,
                     "name": "blog",
                     "item": `${WEBSITE_URL}/blogs`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": post.slug,
+                    "item": fullUrl
+                }
+            ]
+        }
+    ]
+}
+
+export function generateThoughtPostStructuredData(post: ThoughtPost) {
+    const fullUrl = `${WEBSITE_URL}/thoughts/${post.slug}`;
+    const ogImageUrl = `${WEBSITE_URL}/api/og/thought/${post.slug}`;
+
+    return [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+
+            image: ogImageUrl,
+            author: {
+                '@type': 'Person',
+                name: post.author,
+                image: post.authorImage,
+                url: `${WEBSITE_URL}`,
+            },
+            publisher: {
+                '@type': 'Person',
+                name: siteName,
+            },
+            datePublished: post.publishedAt,
+            dateModified: post.publishedAt,
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': fullUrl,
+            },
+
+            wordCount: post.content.split(' ').length,
+            timeRequired: post.readingTime,
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "home",
+                    "item": `${WEBSITE_URL}`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "thoughts",
+                    "item": `${WEBSITE_URL}/thoughts`
                 },
                 {
                     "@type": "ListItem",

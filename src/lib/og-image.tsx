@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og"
 import type { BlogPost } from "./blog"
+import type { ThoughtPost } from "./thoughts";
 import { WEBSITE_DOMAIN } from "@/constants"
 
 export const runtime = "edge"
@@ -9,9 +10,8 @@ interface OGImageProps {
     description?: string
     author?: string
     authorImage?: string
-    category?: string
-    tags?: string[]
-    type?: "blog" | "homepage" | "page"
+    
+    type?: "blog" | "homepage" | "page" | "thought"
     publishedAt?: string
 }
 
@@ -49,125 +49,71 @@ export async function generateOGImage({
                         marginBottom: "40px",
                     }}
                 >
-                    {
-                        type === "blog" && <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "16px",
-                            }}
-                        >
-                            {authorImage && (
-                                <img
-                                    src={authorImage}
-                                    alt={author}
-                                    style={{
-                                        width: "75px",
-                                        height: "75px",
-                                        borderRadius: "50%",
-                                        border: "3px solid #10b981",
-                                    }}
-                                />
-                            )}
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: "4px",
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        fontSize: "30px",
-                                        fontWeight: "600",
-                                        color: "#111827",
-                                    }}
-                                >
-                                    {author}
-                                </div>
-                                {
-                                    publishedAt && <div
-                                        style={{
-                                            fontSize: "22px",
-                                            color: "#6b7280",
-                                        }}
-                                    >
-                                        {
-                                            publishedAt
-                                        }
-                                        {/* {new Date().toLocaleDateString("en-US", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                })} */}
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
-                    {/* <div
+                    <div
                         style={{
                             display: "flex",
                             alignItems: "center",
                             gap: "16px",
                         }}
                     >
-                        <div
-                            style={{
-                                width: "60px",
-                                height: "60px",
-                                borderRadius: "50%",
-                                background: "linear-gradient(135deg, #10b981, #059669)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "white",
-                                fontSize: "24px",
-                                fontWeight: "600",
-                            }}
-                        >
-                            BC
-                        </div>
+                        {authorImage && (
+                            <img
+                                src={authorImage}
+                                alt={author}
+                                style={{
+                                    width: "75px",
+                                    height: "75px",
+                                    borderRadius: "50%",
+                                    border: "3px solid #10b981",
+                                }}
+                            />
+                        )}
                         <div
                             style={{
                                 display: "flex",
                                 flexDirection: "column",
+                                gap: "4px",
                             }}
                         >
                             <div
                                 style={{
-                                    fontSize: "24px",
+                                    fontSize: "30px",
                                     fontWeight: "600",
                                     color: "#111827",
                                 }}
                             >
-                                Bhavesh Chaudhari
+                                {author}
                             </div>
-                            <div
-                                style={{
-                                    fontSize: "16px",
-                                    color: "#6b7280",
-                                }}
-                            >
-                                Developer & Tech Writer
-                            </div>
+                            {
+                                publishedAt && <div
+                                    style={{
+                                        fontSize: "22px",
+                                        color: "#6b7280",
+                                    }}
+                                >
+                                    {new Date(publishedAt).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                </div>
+                            }
                         </div>
-                    </div> */}
-
-                    {/* {category && (
-                        <div
+                    </div>
+                    {
+                        type === "thought" && <div
                             style={{
                                 backgroundColor: "#d1fae5",
                                 color: "#065f46",
                                 padding: "8px 16px",
                                 borderRadius: "20px",
-                                fontSize: "14px",
+                                fontSize: "24px",
                                 fontWeight: "500",
                             }}
                         >
-                            {category}
+                            Thought
                         </div>
-                    )} */}
+                    }
                 </div>
 
                 <div
@@ -374,12 +320,24 @@ export function generateBlogPostOGImage(post: BlogPost) {
 
     return generateOGImage({
         title: post.title,
-        description: post.excerpt,
+        description: post.metaDescription,
         author: post.author,
         authorImage: post.authorImage,
-        category: post.category,
-        tags: post.tags,
+        
         type: "blog",
+        publishedAt: post.publishedAt
+    })
+}
+
+export function generateThoughtPostOGImage(post: ThoughtPost) {
+    console.log("Generating OG image for thought post:", post.title)
+
+    return generateOGImage({
+        title: post.title,
+        description: post.metaDescription,
+        author: post.author,
+        authorImage: post.authorImage,
+        type: "thought",
         publishedAt: post.publishedAt
     })
 }

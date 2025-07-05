@@ -2,16 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-export const ViewCounter = ({ slug }: { slug: string }) => {
+export const ViewCounter = ({ slug, type }: { slug: string, type: 'blog' | 'thought' }) => {
     const [views, setViews] = useState(0)
     const isViewRegistered = useRef(false)
 
     useEffect(() => {
         const fetchViews = async () => {
             try {
-                const res = await fetch(`/api/views/${slug}`)
+                const res = await fetch(`/api/views/${type}/${slug}`)
                 const data = await res.json()
-                setViews(data.views)
+                setViews(data.views || 1)
             } catch (error) {
                 console.error('Error fetching views:', error)
             }
@@ -19,7 +19,7 @@ export const ViewCounter = ({ slug }: { slug: string }) => {
 
         const incrementViews = async () => {
             try {
-                await fetch(`/api/views/${slug}`, { method: 'POST' })
+                await fetch(`/api/views/${type}/${slug}`, { method: 'POST' })
             } catch (error) {
                 console.error('Error incrementing views:', error)
             }
@@ -30,11 +30,24 @@ export const ViewCounter = ({ slug }: { slug: string }) => {
             isViewRegistered.current = true
         }
         fetchViews()
-    }, [slug])
+    }, [slug, type])
 
     if (!views) {
-        return null;
+        return <div></div>;
     }
 
-    return <span>{views.toLocaleString()} views</span>
+    if (type === 'blog') {
+        return <span>{views.toLocaleString()} views</span>
+    }
+
+    if (type === 'thought') {
+        return (
+            <span className="flex items-center gap-1">
+                {views.toLocaleString()}{" "}
+                view{views !== 1 ? 's' : ''}
+            </span>
+        )
+    }
+
+    return <span>{views.toLocaleString()} view{views !== 1 ? 's' : ''}</span>
 }

@@ -9,15 +9,12 @@ export async function GET(request: NextRequest) {
 
     const title = searchParams.get("title") || "Bhavesh Chaudhari"
     const description = searchParams.get("description") || "Programmer. Bringing Ideas To Life. Δ ThinkLearnExecute."
-    const category = searchParams.get("category") || undefined
-    const tags = searchParams.get("tags")?.split(",") || []
+    
     const type = (searchParams.get("type") as "blog" | "homepage" | "page") || "page"
 
     return await generateOGImage({
       title,
       description,
-      category,
-      tags,
       type,
     })
   } catch (error) {

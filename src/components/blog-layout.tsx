@@ -12,7 +12,7 @@ const GiscusComments = dynamic(() => import("./giscus").then(mod => mod.GiscusCo
 
 interface BlogLayoutProps {
     children: React.ReactNode
-    post: BlogPostWithTOC
+    post: BlogPostWithTOC 
 }
 
 export function BlogLayout({ children, post }: BlogLayoutProps) {
@@ -68,7 +68,7 @@ export function BlogLayout({ children, post }: BlogLayoutProps) {
                                     <span>{post.readingTime}</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <ViewCounter slug={post.slug} />
+                                    <ViewCounter slug={post.slug} type={"blog"} />
                                 </div>
                             </div>
                         </header>
