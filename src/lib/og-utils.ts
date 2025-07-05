@@ -121,7 +121,7 @@ export function generateHomepageStructuredData() {
                 {
                     "@type": "ListItem",
                     "position": 1,
-                    "name": "Home",
+                    "name": "home",
                     "item": `${WEBSITE_URL}`
                 }
             ]
@@ -152,13 +152,13 @@ export function generateBlogListStructuredData() {
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": "Home",
+                "name": "home",
                 "item": `${WEBSITE_URL}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "Blog",
+                "name": "blog",
                 "item": `${WEBSITE_URL}/blogs`
             }
         ]
@@ -204,13 +204,13 @@ export function generateBlogPostStructuredData(post: BlogPost) {
                 {
                     "@type": "ListItem",
                     "position": 1,
-                    "name": "Home",
+                    "name": "home",
                     "item": `${WEBSITE_URL}`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "Blog",
+                    "name": "blog",
                     "item": `${WEBSITE_URL}/blogs`
                 },
                 {
