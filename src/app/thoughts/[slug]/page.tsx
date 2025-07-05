@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ThoughtPostPageProps): Promis
         notFound()
     }
 
-    const ogImageUrl = `${WEBSITE_URL}/api/og/thought/${post.slug}`;
+    const ogImageUrl = `${WEBSITE_URL}/api/og/thoughts/${post.slug}`;
     const canonicalUrl = `${WEBSITE_URL}/thoughts/${post.slug}`;
 
     return {
