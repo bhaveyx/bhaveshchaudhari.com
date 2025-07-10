@@ -97,6 +97,10 @@ export function generateHomepageMetadata(): Metadata {
         url: '',
         image: ogImageUrl,
         type: 'website',
+        keywords: [
+            "Bhavesh Chaudhari",
+            "bhavesh chaudhari blog"
+        ]
     });
 }
 
@@ -110,6 +114,13 @@ export function generateBlogListMetadata(): Metadata {
         url: '/blogs',
         image: ogImageUrl,
         type: 'website',
+        keywords: [
+            "Bhavesh Chaudhari",
+            "bhavesh chaudhari blog",
+            "web development",
+            "programming",
+            "technology insights"
+        ]
     });
 }
 
@@ -123,6 +134,12 @@ export function generateThoughtListMetadata(): Metadata {
         url: '/thoughts',
         image: ogImageUrl,
         type: 'website',
+        keywords: [
+            "Bhavesh Chaudhari",
+            "bhavesh chaudhari thoughts",
+            "personal reflections",
+            "observations"
+        ]
     });
 }
 
